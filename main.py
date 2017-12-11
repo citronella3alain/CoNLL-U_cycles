@@ -4,6 +4,5 @@ import sys
 from conllu.parser import parse_tree
 if (len(sys.argv) != 2):
     raise Exception('Invalid Input')
-filename = sys.argv[1]
-fh = open(filename, 'w')
-
+data = parse_tree(open(sys.argv[1], 'r').read())
+print(data)
