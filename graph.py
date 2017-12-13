@@ -2,6 +2,7 @@
 # graph.py
 from collections import defaultdict
 
+
 class Graph():
     def __init__(self, vertices):
         self.graph = defaultdict(list)
@@ -10,17 +11,17 @@ class Graph():
     def add_edge(self, u, v):
         self.graph[u].append(v)
 
-    def is_cyclic_util(self, v, visited, recStack):
+    def is_cyclic_util(self, v, visited, rec_stack):
         visited[v] = True
-        recStack[v] = True
+        rec_stack[v] = True
 
         for neighbor in self.graph[v]:
             if not visited[neighbor]:
-                if self.is_cyclic_util(neighbor, visited, recStack):
+                if self.is_cyclic_util(neighbor, visited, rec_stack):
                     return True
-            elif recStack[neighbor]:
+            elif rec_stack[neighbor]:
                 return True
-        recStack[v] = False
+        rec_stack[v] = False
         return False
 
     def is_cyclic(self):
