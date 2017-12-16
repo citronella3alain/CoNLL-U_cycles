@@ -8,7 +8,7 @@ tasks.
 * [CoNLL-U Parser](https://github.com/EmilStenstrom/conllu) parses 
 a [CoNLL-U formatted](http://universaldependencies.org/format.html) file.
 ## Usage
-    python main.py <CoNLL-U file>
+    python3 main.py <CoNLL-U file>
 ## Example Cases:
 Here presents the example cases provided with the scripts.
 ### Cycle not Present
@@ -22,11 +22,21 @@ Take a look at a test case without a cycle: [CoNLL-U sans cycle](conllu_sans_cyc
     5    books    book    NOUN    NNS    Number=Plur                        2    obj      2:obj|4:obj
     6    .        .       PUNCT   .      _                                  2    punct    2:punct
     
-    python main.py conllu_sans_cycle.txt
+    python3 main.py conllu_sans_cycle.txt
     No cycles found.
 Take a look at a test case with a cycle: [CoNLL-U con cycle](conllu_con_cycle.txt).
 ###
-    cat 
+    cat conllu_con_cycle.txt
+    1    They     they    PRON    PRP    Case=Nom|Number=Plur               2    nsubj    2:nsubj|4:nsubj
+    2    buy      buy     VERB    VBP    Number=Plur|Person=3|Tense=Pres    3    ERROR    3:ERROR
+    3    and      and     CONJ    CC     _                                  4    cc       4:cc
+    4    sell     sell    VERB    VBP    Number=Plur|Person=3|Tense=Pres    2    conj     0:root|2:conj
+    5    books    book    NOUN    NNS    Number=Plur                        2    obj      2:obj|4:obj
+    6    .        .       PUNCT   .      _                                  2    punct    2:punct
+    
+    python3 main.py conllu_con_cycle.txt
+    Cycle found with the following path: [2, 4, 3]
+The cycle is indeed "buy", "sell", "and".
 ## Authors
 * Allen Mao (Google Code-In 2017)
 ## License
